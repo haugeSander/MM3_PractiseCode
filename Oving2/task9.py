@@ -10,8 +10,8 @@ def naive_gauss(A, b):
         for i in range(j + 1, n):
             mult = S[i, j] / S[j, j]
             S[i, j] = 0.0
-            for k in range(i, m):
-                S[i, k] = S[i, k]-mult*S[j,k]
+            for k in range(i + 1, n + 1):
+                S[i, k] = S[i, k] - mult * S[j,k]
 
     return S[:, 0:n], S[:, -1]
 
