@@ -22,24 +22,26 @@ def LUsolve(L, U, b):
     n = len(c)
     for i in range(n - 1, -1, -1):
         c[i] = b[i]
+
         for j in range(i + 1, n):
-            c[i] = c[i] - ??????
+            c[i] -= L[i, j] * c[j]
 
-    x = c.copy()
+    x = np.zeros_like(b)
 
-    for i in ?????:
-        for j in ??????:
-            x[i] = ?????
-        x[i] = ?????
+    for i in range(n - 1, -1, -1):
+        for j in range(i + 1, n):
+            x[i] -= U[i, j] * x[j]
+        x[i] /= U[i, i]
 
     return x
 
-A = np.array([[3, 1, 2], [6, 3, 4], [3, 1, 5]])
-b = np.array([0, 1, 3]).T
+A = np.array([[3.0, 1.0, 2.0], [6.0, 3.0, 4.0], [3.0, 1.0, 5.0]])
+b = np.array([0.0, 1.0, 3.0]).T
 
 try:
     L, U = LUfactorize(A)
     x = LUsolve(L, U, b)
+    print(x)
 except np.linalg.LinAlgError as e:
     print(f"LinAlgError: {e}")
 
