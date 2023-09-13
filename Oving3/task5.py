@@ -11,10 +11,12 @@ def euler(f, y_init, h, t_slutt):
    return t, y
 
 f = lambda t: t
-y_exact = lambda t: t^2+1.0
+y_exact = lambda t: (1/2) * t**2 + 1
 t, y = euler(f, 1, 0.25, 1.0)
-
-error = abs(np.array(y_exact(t))-np.array(y))
+# Creates a list of actual values.
+y_exact_list = [y_exact(t_i) for t_i in t]
+# Extracts exact value from all places in array.
+error = abs(np.array(y)-np.array(y_exact_list))
 
 headers = ["t", "euler", "error"]
 print(f"{headers[0]:<8}{headers[1]:<8} {headers[2]:<8}")
